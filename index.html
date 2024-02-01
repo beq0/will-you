@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style>
+		html { height: 100%; font-family: cursive; }
+		body {background-color: powderblue; height: 100%;}
+		h1   {color: blue;}
+		p    {color: red;}
+
+		._fleex {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+    	justify-content: center;
+		}
+
+		#choises {
+			display: flex;
+			gap: 40px;
+			width: 40%;
+			height: 40px;
+			justify-content: center;
+		}
+
+		button {
+			font-family: cursive;
+			border-radius: 5px;
+			border-width: 0px;
+			font-size: 20px;
+			width: 30%;
+			height: 50px;
+			cursor: pointer;
+			box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+		}
+
+		#yes-button {
+			background: #a8ffa8;
+		}
+
+		#no-button {
+			background: #ffb6b6;
+		}
+
+		.choice {
+			display: none;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="_fleex">
+		<h1 id="question">Will you be my Valentine? 🥰</h1>
+		
+		<div id="incorrect-choice-1" class="choice">
+			<h1>Nah nah, choose the right one 🙂</h1>
+			<img src="https://i.pinimg.com/474x/47/a3/e5/47a3e576cb183b6813b3d6c9babe1409.jpg" style="width: 300px;">
+		</div>
+		
+		<div id="incorrect-choice-2" class="choice">
+			<h1>Correct, FUCKING, One 😊</h1>
+			<img src="https://content.imageresizer.com/images/memes/Gru-Pointing-Gun-meme-6.jpg" style="width: 300px;">
+		</div>
+		
+		<div id="incorrect-choice-3" class="choice">
+			<img src="https://i.redd.it/r9ig2fwdzm531.jpg" style="width: 300px;">
+		</div>
+
+		<div id="correct-choice" class="choice">
+			<h1>Oh yeaah</h1>
+			<img src="https://pbs.twimg.com/media/DyiHYBxV4AEBwlE.jpg" style="width: 300px;">
+		</div>
+		
+		
+		<div id="choises">
+			<button id="yes-button" onclick="yesClicked()">YES 😍</button>
+			<button id="no-button" onclick="noClicked()">NO 💀</button>
+		</div>
+	</div>
+</body>
+
+<script>
+	let incTimes = 1;
+	let currIncChoice = "incorrect-choice-1";
+	let lastIncChoice = "question";
+
+	function noClicked() {
+		setDisplayById(lastIncChoice, "none");
+		setDisplayById(currIncChoice, "flex");
+
+		if (incTimes === 3) {
+			setDisplayById("no-button", "none");
+		} else {
+			incTimes++;
+		}
+
+		lastIncChoice = currIncChoice;
+		currIncChoice = `incorrect-choice-${incTimes}`;
+	}
+
+	function yesClicked() {
+		setDisplayById(currIncChoice, "none");
+		setDisplayById("question", "none");
+		setDisplayById("choises", "none");
+		setDisplayById("correct-choice", "flex");
+	}
+
+	function setDisplayById(elemId, displayName) {
+		elem = document.getElementById(elemId);
+		elem.style.display = displayName;
+	}
+</script>
+</html>
